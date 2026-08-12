@@ -13,6 +13,7 @@ def scorePrint():
     return result
 
 def gameRun():
+    mixer.init()
     question = random.choice(words)
     print(question)
     answer = input()
@@ -27,15 +28,20 @@ def gameRun():
         mixer.music.play()
         return 0
 
+def wordLoad():
+    with open("./word_game_problem/data/word.txt","r", encoding='utf-8') as f:
+        word=list(f)
+        word = [w.strip() for w in word]
+    return word
+
 #################main#################
-mixer.init()
-with open("./word_game_problem/data/word.txt","r", encoding='utf-8') as f:
-    words=list(f)
-    words = [word.strip() for word in words]
+if __name__ == "__main__":
+    print(__name__)
+    words = wordLoad()
     print(words)
-input("준비? 엔터를 입력하세요.")
-starttime = time.time()
-total_corr = scorePrint()
-endtime = time.time()
-total_time = endtime-starttime
-print("게임 걸린시간 : %.2f초, 맞춘 개수: %d"%(total_time, total_corr))
+    input("준비? 엔터를 입력하세요.")
+    starttime = time.time()
+    total_corr = scorePrint()
+    endtime = time.time()
+    total_time = endtime-starttime
+    print("게임 걸린시간 : %.2f초, 맞춘 개수: %d"%(total_time, total_corr))
